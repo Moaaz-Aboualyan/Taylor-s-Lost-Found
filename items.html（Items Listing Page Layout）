@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Browse Found Items</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="logo">Taylor's Lost & Found</div>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="items.html">Browse Items</a>
+      <a href="report.html">Report Lost Item</a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <h1>Found Items</h1>
+
+    <section class="items-grid">
+
+      <article class="item-card">
+        <h3>Blue Water Bottle</h3>
+        <p>Found at Lecture Theatre 3.</p>
+        <a href="detail.html">View Details</a>
+      </article>
+
+      <article class="item-card">
+        <h3>Earphones</h3>
+        <p>Found inside Student Lounge.</p>
+        <a href="detail.html">View Details</a>
+      </article>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Taylor's Lost & Found</p>
+  </footer>
+
+</body>
+</html>
