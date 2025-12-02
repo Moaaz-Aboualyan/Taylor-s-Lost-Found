@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Report Lost Item</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="logo">Taylor's Lost & Found</div>
+      <nav class="main-nav">
+        <a href="/index.html">Home</a>
+        <a href="/items.html">Browse Items</a>
+        <a href="/report.html">Report Lost Item</a>
+      </nav>
+    </header>
+
+    <main class="content">
+      <h1>Report a Lost Item</h1>
+
+      <form id="reportForm" class="report-form">
+        <div class="form-group">
+          <label>Item Name:</label>
+          <input type="text" id="itemName" required />
+        </div>
+
+        <div class="form-group">
+          <label>Location Lost:</label>
+          <input type="text" id="itemLocation" required />
+        </div>
+
+        <div class="form-group">
+          <label>Description:</label>
+          <textarea id="itemDesc" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Your Contact:</label>
+          <input type="text" id="contact" required />
+        </div>
+
+        <button type="submit" class="btn-primary">Submit Report</button>
+      </form>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2025 Taylor's Lost & Found</p>
+    </footer>
+  </body>
+</html>
