@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Found Items - Taylor's University Lost & Found</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <a href="index.html" class="logo">
+        📦 Taylor's University Lost & Found
+      </a>
+      <nav class="main-nav">
+        <a href="index.html">🏠 Home</a>
+        <a href="lost-items.html">🔍 Lost Items</a>
+        <a href="found-items.html">📦 Found Items</a>
+      </nav>
+      <div class="user-section">
+        <span class="user-name">👤 moaaz</span>
+        <a href="index.html" class="logout-btn">🚪 Logout</a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content">
+      <div class="header-actions">
+        <div class="page-header">
+          <h1>Found Items</h1>
+          <p>Browse found items or report something you've found</p>
+        </div>
+        <a href="report-found-items.html" class="btn-black"
+          >Report Found Item</a
+        >
+      </div>
+
+      <div class="items-layout">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+          <div class="filters-header">
+            <h3>🔍 Filters</h3>
+            <span class="hide-filters">Hide</span>
+          </div>
+
+          <form id="filterForm">
+            <div class="filter-group">
+              <label>Search</label>
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Search items..."
+              />
+            </div>
+
+            <div class="filter-group">
+              <label>Category</label>
+              <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="electronics">Electronics</option>
+                <option value="personal">Personal Items</option>
+                <option value="books">Books & Stationery</option>
+                <option value="keys">Keys & Cards</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>Location</label>
+              <select id="locationFilter">
+                <option value="">All Locations</option>
+                <option value="library">Library</option>
+                <option value="cafeteria">Cafeteria</option>
+                <option value="lecture-hall">Lecture Halls</option>
+                <option value="parking">Parking</option>
+                <option value="corridor">Corridors</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label>Date From</label>
+              <input type="date" id="dateFrom" />
+            </div>
+
+            <div class="filter-group">
+              <label>Date To</label>
+              <input type="date" id="dateTo" />
+            </div>
+
+            <div class="filter-group">
+              <label>Time Period</label>
+              <select id="timePeriod">
+                <option value="">Any Time</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+              </select>
+            </div>
+
+            <div class="filter-actions">
+              <button type="submit" class="btn-apply">Apply Filters</button>
+              <button type="reset" class="btn-reset">Reset</button>
+            </div>
+          </form>
+        </aside>
+
+        <!-- Items Grid -->
+        <section class="items-grid">
+          <div class="items-count">Showing 4 items</div>
+
+          <article
+            class="item-card"
+            data-category="electronics"
+            data-location="lecture-hall"
+            data-date="2025-11-11"
+          >
+            <div class="item-image">💻</div>
+            <div class="item-details">
+              <h3>HP laptop charger with a small dent on the adapter</h3>
+              <div class="item-meta">
+                <span>📍 Lecture Hall 2</span>
+                <span>📅 2025-11-11</span>
+                <span>🕐 14:30</span>
+              </div>
+              <span class="item-category">Electronics</span>
+            </div>
+            <div class="item-action">
+              <button class="btn-contact">Contact Reporter</button>
+            </div>
+          </article>
+
+          <article
+            class="item-card"
+            data-category="personal"
+            data-location="library"
+            data-date="2025-11-10"
+          >
+            <div class="item-image">☂️</div>
+            <div class="item-details">
+              <h3>Red folding umbrella with floral pattern</h3>
+              <div class="item-meta">
+                <span>📍 Library Level 1</span>
+                <span>📅 2025-11-10</span>
+                <span>🕐 10:15</span>
+              </div>
+              <span class="item-category">Personal Items</span>
+            </div>
+            <div class="item-action">
+              <button class="btn-contact">Contact Reporter</button>
+            </div>
+          </article>
+
+          <article
+            class="item-card"
+            data-category="books"
+            data-location="corridor"
+            data-date="2025-11-09"
+          >
+            <div class="item-image">📘</div>
+            <div class="item-details">
+              <h3>
+                Engineering Mathematics 3rd Edition with highlighted notes
+              </h3>
+              <div class="item-meta">
+                <span>📍 Block A Corridor</span>
+                <span>📅 2025-11-09</span>
+                <span>🕐 16:45</span>
+              </div>
+              <span class="item-category">Books & Stationery</span>
+            </div>
+            <div class="item-action">
+              <button class="btn-contact">Contact Reporter</button>
+            </div>
+          </article>
+
+          <article
+            class="item-card"
+            data-category="keys"
+            data-location="parking"
+            data-date="2025-11-08"
+          >
+            <div class="item-image">🔑</div>
+            <div class="item-details">
+              <h3>
+                Toyota car keys with Taylor's University keychain attached
+              </h3>
+              <div class="item-meta">
+                <span>📍 Parking Lot B</span>
+                <span>📅 2025-11-08</span>
+                <span>🕐 18:00</span>
+              </div>
+              <span class="item-category">Keys & Cards</span>
+            </div>
+            <div class="item-action">
+              <button class="btn-contact">Contact Reporter</button>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>© 2025 Taylor's Lost & Found</p>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
