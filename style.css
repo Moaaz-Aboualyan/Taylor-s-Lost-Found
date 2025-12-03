@@ -18,7 +18,7 @@ body {
   border-bottom: 1px solid #e0e0e0;
   padding: 0.75rem 3rem;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -29,13 +29,16 @@ body {
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
+  /* Make header a three-part layout: logo | centered nav | user section */
+  flex: 1;
 }
 
 .main-nav {
   display: flex;
   gap: 2rem;
   align-items: center;
-  margin: 0 auto;
+  /* Center block, sides take up remaining space */
+  margin: 0;
 }
 
 .main-nav a {
@@ -57,7 +60,10 @@ body {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin-left: auto;
+  /* Push user section to the right while keeping nav centered */
+  margin-left: 0;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .user-name {
