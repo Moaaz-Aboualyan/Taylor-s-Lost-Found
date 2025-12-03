@@ -1,93 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Report Submitted - Taylor's University Lost & Found</title>
     <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="site-header">
-      <a href="index.html" class="logo">
-        📦 Taylor's University Lost & Found
-      </a>
-      <nav class="main-nav">
-        <a href="index.html">🏠 Home</a>
-        <a href="lost-items.html">🔍 Lost Items</a>
-        <a href="found-items.html">📦 Found Items</a>
-      </nav>
-      <div class="user-section">
-        <span class="user-name">👤 moaaz</span>
-        <a href="index.html" class="logout-btn">🚪 Logout</a>
-      </div>
-    </header>
+</head>
+<body>
+<!-- Header -->
+<div id="header-placeholder"></div>
 
-    <!-- Success Content -->
-    <main class="success-container">
-      <div class="success-card">
+<!-- Success Content -->
+<main class="success-container">
+    <div class="success-card">
         <div class="success-icon">✓</div>
         <h1>Lost Item Report Submitted</h1>
         <p>
-          Your report has been successfully submitted. Here's a summary of what
-          you reported:
+            Your report has been successfully submitted. Here's a summary of what
+            you reported:
         </p>
 
         <div class="summary-section">
-          <div class="summary-row">
-            <div class="summary-label">Item Name:</div>
-            <div class="summary-value" id="displayItemName">Item</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-label">Category:</div>
-            <div class="summary-value" id="displayCategory">Other</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-label">Date & Time:</div>
-            <div class="summary-value" id="displayDateTime">
-              2025-11-05 at 05:48
+            <div class="summary-row">
+                <div class="summary-label">Item Name:</div>
+                <div class="summary-value" id="displayItemName">Item</div>
             </div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-label">Location:</div>
-            <div class="summary-value" id="displayLocation">Other</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-label">Description:</div>
-            <div class="summary-value" id="displayDescription">Description</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-label">Contact Name:</div>
-            <div class="summary-value" id="displayContactName">moaaz</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-label">Contact Email:</div>
-            <div class="summary-value" id="displayEmail">email@email.com</div>
-          </div>
-          <div class="summary-row">
-            <div class="summary-label">Contact Phone:</div>
-            <div class="summary-value" id="displayPhone">0111111111</div>
-          </div>
+            <div class="summary-row">
+                <div class="summary-label">Category:</div>
+                <div class="summary-value" id="displayCategory">Other</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Date & Time:</div>
+                <div class="summary-value" id="displayDateTime">2025-11-05 at 05:48</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Location:</div>
+                <div class="summary-value" id="displayLocation">Other</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Description:</div>
+                <div class="summary-value" id="displayDescription">Description</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Contact Name:</div>
+                <div class="summary-value" id="displayContactName">Name</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Contact Email:</div>
+                <div class="summary-value" id="displayEmail">email@email.com</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Contact Phone:</div>
+                <div class="summary-value" id="displayPhone">Phone</div>
+            </div>
         </div>
 
         <div class="info-box">
-          <p>
-            You will receive a confirmation email at
-            <strong><a href="#" id="confirmEmail">email@email.com</a></strong
-            >. The campus security team will contact you if there are any
-            updates.
-          </p>
+            <p>
+                You will receive a confirmation email at
+                <strong><a href="#" id="confirmEmail">email@email.com</a></strong>.
+                The campus security team will contact you if there are any updates.
+            </p>
         </div>
 
         <a href="lost-items.html" class="btn-done">Done</a>
-      </div>
-    </main>
+    </div>
+</main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-      <p>© 2025 Taylor's Lost & Found</p>
-    </footer>
-
-    <script src="main.js"></script>
-  </body>
+<!-- Footer -->
+<div id="footer-placeholder"></div>
+<script src="main.js"></script>
+<script src="report.js"></script>
+</body>
 </html>

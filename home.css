@@ -4,18 +4,26 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-red: #c4001a;
+  --color-red-dark: #990014;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-200: #e0e0e0;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: var(--color-white);
+  color: var(--color-black);
   line-height: 1.6;
 }
 
 /* Header */
 .site-header {
-  background-color: #fff;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: var(--color-red);
+  border-bottom: 1px solid var(--color-red-dark);
   padding: 0.75rem 3rem;
   display: flex;
   justify-content: center;
@@ -24,7 +32,7 @@ body {
 
 .logo {
   font-size: 0.95rem;
-  color: #666;
+  color: var(--color-white);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -43,7 +51,7 @@ body {
 
 .main-nav a {
   text-decoration: none;
-  color: #888;
+  color: var(--color-white);
   font-size: 0.9rem;
   display: flex;
   align-items: center;
@@ -52,7 +60,8 @@ body {
 }
 
 .main-nav a:hover {
-  color: #333;
+  color: var(--color-white);
+  text-decoration: underline;
 }
 
 /* User section (match other pages) */
@@ -67,7 +76,7 @@ body {
 }
 
 .user-name {
-  color: #666;
+  color: var(--color-white);
   font-size: 0.9rem;
   display: flex;
   align-items: center;
@@ -76,8 +85,8 @@ body {
 
 .logout-btn {
   background-color: transparent;
-  border: 1px solid #000;
-  color: #000;
+  border: 1px solid var(--color-white);
+  color: var(--color-white);
   padding: 0.4rem 1rem;
   border-radius: 4px;
   font-size: 0.85rem;
@@ -90,27 +99,27 @@ body {
 }
 
 .logout-btn:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-white);
+  color: var(--color-red);
 }
 
 /* Hero Section */
 .hero {
-  background-color: #fff;
+  background-color: var(--color-white);
   text-align: center;
   padding: 3.5rem 2rem 2.5rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--color-gray-200);
 }
 
 .hero h1 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-black);
   margin-bottom: 1rem;
 }
 
 .hero p {
-  color: #666;
+  color: #333;
   font-size: 0.95rem;
   margin-bottom: 2rem;
   max-width: 600px;
@@ -120,8 +129,8 @@ body {
 
 .btn-primary {
   display: inline-block;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-red);
+  color: var(--color-white);
   padding: 0.7rem 1.8rem;
   border-radius: 4px;
   text-decoration: none;
@@ -132,7 +141,7 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #333;
+  background-color: var(--color-red-dark);
 }
 
 /* Main Content */
@@ -151,8 +160,8 @@ body {
 }
 
 .panel-card {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-200);
   border-radius: 8px;
   padding: 2rem;
   display: flex;
@@ -167,19 +176,19 @@ body {
 .panel-content h2 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-black);
   margin-bottom: 0.5rem;
 }
 
 .panel-content p {
-  color: #666;
+  color: #333;
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: 1rem;
 }
 
 .panel-content a {
-  color: #000;
+  color: var(--color-red);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
@@ -205,8 +214,8 @@ body {
 }
 
 .stat-card {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-200);
   border-radius: 8px;
   padding: 2rem;
   text-align: center;
@@ -215,12 +224,12 @@ body {
 .stat-number {
   font-size: 2.5rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-black);
   margin-bottom: 0.5rem;
 }
 
 .stat-label {
-  color: #666;
+  color: var(--color-black);
   font-size: 0.9rem;
 }
 
@@ -250,8 +259,8 @@ body {
 .step-number {
   width: 50px;
   height: 50px;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-red);
+  color: var(--color-white);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -264,12 +273,12 @@ body {
 .step h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--color-black);
   margin-bottom: 0.5rem;
 }
 
 .step p {
-  color: #666;
+  color: #333;
   font-size: 0.9rem;
   line-height: 1.5;
   max-width: 280px;
@@ -278,12 +287,12 @@ body {
 
 /* Footer */
 .site-footer {
-  background-color: #fff;
-  border-top: 1px solid #e0e0e0;
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-gray-200);
   text-align: center;
   padding: 1.5rem;
   margin-top: 3rem;
-  color: #666;
+  color: var(--color-black);
   font-size: 0.85rem;
 }
 
