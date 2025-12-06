@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Support & Info - Taylor's University Lost & Found</title>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body>
 <!-- Header -->
@@ -77,22 +77,22 @@
     <section class="message-section">
         <h2>Send Us a Message</h2>
         <div class="form-card">
-            <form id="contactForm">
+            <form id="contactForm" action="message-sent.html" method="get">
                 <div class="form-group">
                     <label>Name *</label>
-                    <input type="text" placeholder="Your full name" required/>
+                    <input type="text" id="name" name="name" placeholder="Your full name" required/>
                 </div>
                 <div class="form-group">
                     <label>Email *</label>
-                    <input type="email" placeholder="your.email@taylors.edu.my" required/>
+                    <input type="email" id="email" name="email" placeholder="your.email@taylors.edu.my" required/>
                 </div>
                 <div class="form-group">
                     <label>Subject *</label>
-                    <input type="text" placeholder="What is your inquiry about?" required/>
+                    <input type="text" id="subject" name="subject" placeholder="What is your inquiry about?" required/>
                 </div>
                 <div class="form-group">
                     <label>Message *</label>
-                    <textarea placeholder="Please provide details about your inquiry..." required></textarea>
+                    <textarea id="message" name="message" placeholder="Please provide details about your inquiry..." required></textarea>
                 </div>
                 <button type="submit" class="btn-submit">Send Message</button>
             </form>
@@ -116,6 +116,6 @@
 <!-- Footer -->
 <div id="footer-placeholder"></div>
 
-<script src="main.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report Submitted - Taylor's University Lost & Found</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+<!-- Header -->
+<div id="header-placeholder"></div>
+
+<!-- Success Content -->
+<main class="success-container">
+    <div class="success-card">
+        <div class="success-icon">✓</div>
+        <h1>Message has been sent!</h1>
+        <p>
+            Your message has been sent successfully! Here's a summary of what
+            you reported:
+        </p>
+
+        <div class="summary-section">
+            <div class="summary-row">
+                <div class="summary-label">Name:</div>
+                <div class="summary-value" id="displayName">Item</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Email:</div>
+                <div class="summary-value" id="displayEmail">Other</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Subject:</div>
+                <div class="summary-value" id="displaySubject">2025-11-05 at 05:49</div>
+            </div>
+            <div class="summary-row">
+                <div class="summary-label">Message:</div>
+                <div class="summary-value" id="displayMessage">Other</div>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <p>
+                You will receive a confirmation email at
+                <strong><a href="#" id="confirmEmail">email@email.com</a></strong>.
+                The campus security team will contact you if there are any updates.
+            </p>
+        </div>
+
+        <a href="support-info.html" class="btn-done">Done</a>
+    </div>
+</main>
+
+<!-- Footer -->
+<div id="footer-placeholder"></div>
+<script src="../js/main.js"></script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    const getValue = key => params.get(key) || "";
+
+    const name = getValue("name");
+    const email = getValue("email");
+    const subject = getValue("subject");
+    const message = getValue("message");
+
+    // Populate the summary fields if they exist
+    const setText = (id, value) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+    };
+
+    setText("displayName", name);
+    setText("displayEmail", email);
+    setText("displaySubject", subject);
+    setText("displayMessage", message);
+
+    // Set email display and mailto link
+    const emailEl = document.getElementById("displayEmail");
+    const confirmEmailLink = document.getElementById("confirmEmail");
+
+    if (emailEl) emailEl.textContent = email;
+    if (confirmEmailLink) {
+        confirmEmailLink.href = `mailto:${email}`;
+        confirmEmailLink.textContent = email;
+    }
+</script>
+</body>
+</html>
