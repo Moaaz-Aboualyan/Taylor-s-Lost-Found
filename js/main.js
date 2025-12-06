@@ -140,37 +140,78 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function applyFilters() {
-        const searchInput = document.getElementById('searchInput');
-        const categoryFilter = document.getElementById('categoryFilter');
-        const locationFilter = document.getElementById('locationFilter');
-
-        const keyword = searchInput ? searchInput.value.toLowerCase() : '';
-        const category = categoryFilter ? categoryFilter.value : '';
-        const location = locationFilter ? locationFilter.value : '';
+        const keyword = document.getElementById('searchInput')?.value.toLowerCase() || '';
+        const category = document.getElementById('categoryFilter')?.value || '';
+        const location = document.getElementById('locationFilter')?.value || '';
+        const dateFrom = document.getElementById('dateFrom')?.value || '';
+        const dateTo = document.getElementById('dateTo')?.value || '';
+        const timePeriod = document.getElementById('timePeriod')?.value || '';
 
         const items = document.querySelectorAll('.item-card');
         let visibleCount = 0;
 
-        items.forEach(function(item) {
-            const title = item.querySelector('h3') ? item.querySelector('h3').innerText.toLowerCase() : '';
-            const itemCategory = item.getAttribute('data-category'); 
-            const itemLocation = item.getAttribute('data-location');
+        // ---- Calculate Time Period Range ----
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
+        let periodStart = null;
+
+        if (timePeriod === 'today') {
+            periodStart = new Date(today);
+        }
+        else if (timePeriod === 'week') {
+            periodStart = new Date(today);
+            periodStart.setDate(today.getDate() - 7);
+        }
+        else if (timePeriod === 'month') {
+            periodStart = new Date(today);
+            periodStart.setMonth(today.getMonth() - 1);
+        }
+
+        items.forEach(item => {
+            const title = item.querySelector('h3')?.innerText.toLowerCase() || '';
+            const itemCategory = item.dataset.category;
+            const itemLocation = item.dataset.location;
+            const itemDateStr = item.dataset.date; // YYYY-MM-DD
+            const itemDate = itemDateStr ? new Date(itemDateStr) : null;
+
+            // --- Match Conditions ---
             const matchesSearch = title.includes(keyword);
-            const matchesCategory = (category === '' || category === 'All Categories') || (itemCategory === category);
-            const matchesLocation = (location === '' || location === 'All Locations') || (itemLocation === location);
 
-            if (matchesSearch && matchesCategory && matchesLocation) {
-                item.style.display = 'flex'; 
+            const matchesCategory =
+                !category || category === 'All Categories' || itemCategory === category;
+
+            const matchesLocation =
+                !location || location === 'All Locations' || itemLocation === location;
+
+            const matchesDateRange =
+                (!dateFrom || itemDateStr >= dateFrom) &&
+                (!dateTo || itemDateStr <= dateTo);
+
+            const matchesTimePeriod =
+                !periodStart || (itemDate && itemDate >= periodStart);
+
+            // --- Final Decision ---
+            if (
+                matchesSearch &&
+                matchesCategory &&
+                matchesLocation &&
+                matchesDateRange &&
+                matchesTimePeriod
+            ) {
+                item.style.display = 'flex';
                 visibleCount++;
             } else {
-                item.style.display = 'none'; 
+                item.style.display = 'none';
             }
         });
 
         const countLabel = document.querySelector('.items-count');
-        if (countLabel) countLabel.textContent = `Showing ${visibleCount} items`;
+        if (countLabel) {
+            countLabel.textContent = `Showing ${visibleCount} items`;
+        }
     }
+
 
     // ==========================================================================
     // SECTION 4: ITEM ACTION BUTTONS (BULLETPROOF VERSION)
