@@ -1,5 +1,5 @@
-// Minimal client script for Taylor's Lost & Found
-// Handles global components (Header/Footer), User Session, and Form Validations.
+// Client-side script for Taylor's Lost & Found
+// Handles Header/Footer, User Session, Validation, Filtering, and Item Actions.
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -7,28 +7,23 @@ document.addEventListener("DOMContentLoaded", function () {
     // SECTION 1: GLOBAL SITE LOGIC (Header, Footer, User Session)
     // ==========================================================================
 
-    // 1. Load Header Content
+    // 1. Load Header
     const headerContainer = document.getElementById("header-placeholder");
     if (headerContainer) {
         fetch("header.html")
             .then(res => res.text())
             .then(html => {
                 headerContainer.innerHTML = html;
-
-                // Handle Student ID / User Display after header loads
+                
+                // User Session Logic
                 const studentId = sessionStorage.getItem("studentId");
                 const userNameElem = document.getElementById("userNameDisplay");
                 const logoutBtn = document.getElementById("logoutBtn");
 
                 if (userNameElem) {
-                    if (studentId) {
-                        userNameElem.textContent = `👤 ${studentId}`;
-                    } else {
-                        userNameElem.textContent = "👤 Guest";
-                    }
+                    userNameElem.textContent = studentId ? `👤 ${studentId}` : "👤 Guest";
                 }
 
-                // Handle Logout Click
                 if (logoutBtn) {
                     logoutBtn.addEventListener("click", function (e) {
                         e.preventDefault();
@@ -40,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(err => console.error("Failed to load header:", err));
     }
 
-    // 2. Load Footer Content
+    // 2. Load Footer
     const footerContainer = document.getElementById("footer-placeholder");
     if (footerContainer) {
         fetch("footer.html")
@@ -55,160 +50,160 @@ document.addEventListener("DOMContentLoaded", function () {
     // SECTION 2: FORM VALIDATION LOGIC
     // ==========================================================================
 
-    /**
-     * Helper function to display error alerts and focus the field
-     */
     function showError(inputId, message) {
         alert(message);
         const element = document.getElementById(inputId);
         if (element) {
             element.focus();
-            element.style.borderColor = "red"; // Visual cue
+            element.style.border = "2px solid red"; 
         }
         return false;
     }
 
     // --- A. REPORT LOST ITEM FORM ---
-    const lostItemForm = document.getElementById('lostItemForm');
-
+    const lostItemForm = document.getElementById('reportLostForm');
     if (lostItemForm) {
         lostItemForm.addEventListener('submit', function(event) {
-            // Stop submission to validate first
-            event.preventDefault(); 
-            
-            if (validateLostItemForm()) {
+            if (!validateLostItemForm()) {
+                event.preventDefault(); 
+            } else {
                 alert('Success: Lost Item Report is valid! Submitting...');
-                // In a real scenario, you would uncomment the line below:
-                // lostItemForm.submit();
             }
         });
     }
 
     function validateLostItemForm() {
-        // 1. Check Item Name
         const itemName = document.getElementById('itemName');
-        if (!itemName || itemName.value.trim() === '') {
-            return showError('itemName', 'Item Name is required.');
-        }
+        if (!itemName || itemName.value.trim() === '') return showError('itemName', 'Item Name is required.');
 
-        // 2. Check Category (Assumes index 0 is "Select Category")
-        const itemCategory = document.getElementById('itemCategory');
-        if (!itemCategory || itemCategory.selectedIndex === 0) {
-            return showError('itemCategory', 'Please select a Category.');
-        }
+        const category = document.getElementById('category');
+        if (!category || category.value === '') return showError('category', 'Please select a Category.');
 
-        // 3. Check Date Lost (Must not be in the future)
         const dateLost = document.getElementById('dateLost');
-        if (dateLost) {
-            const selectedDate = new Date(dateLost.value);
-            const today = new Date();
-            if (selectedDate > today) {
-                return showError('dateLost', 'Date Lost cannot be in the future.');
-            }
+        if (dateLost && dateLost.value) {
+            if (new Date(dateLost.value) > new Date()) return showError('dateLost', 'Date Lost cannot be in the future.');
         }
 
-        // 4. Check Reporter Email (Taylor's Domain Check)
-        const reporterEmail = document.getElementById('reporterEmail');
+        const email = document.getElementById('email');
         const emailPattern = /@taylors\.edu\.my$/i;
-        if (!reporterEmail || reporterEmail.value.trim() === '') {
-            return showError('reporterEmail', 'Email is required.');
-        } else if (!emailPattern.test(reporterEmail.value)) {
-            return showError('reporterEmail', 'Please use a valid Taylor\'s email (@taylors.edu.my).');
-        }
+        if (!email || email.value.trim() === '') return showError('email', 'Email is required.');
+        else if (!emailPattern.test(email.value)) return showError('email', 'Please use a valid Taylor\'s email (@taylors.edu.my).');
 
-        // 5. Check Phone Number
-        const reporterPhone = document.getElementById('reporterPhone');
+        const phone = document.getElementById('phone');
         const phonePattern = /^\+?[\d\s-]{10,15}$/; 
-        if (!reporterPhone || reporterPhone.value.trim() === '') {
-            return showError('reporterPhone', 'Phone number is required.');
-        } else if (!phonePattern.test(reporterPhone.value)) {
-            return showError('reporterPhone', 'Invalid phone number format.');
-        }
+        if (!phone || phone.value.trim() === '') return showError('phone', 'Phone number is required.');
+        else if (!phonePattern.test(phone.value)) return showError('phone', 'Invalid phone number format.');
 
-        return true; // All checks passed
+        return true; 
     }
 
-
     // --- B. REPORT FOUND ITEM FORM ---
-    // (Assumes IDs: foundItemForm, foundItemName, foundCategory, etc.)
-    const foundItemForm = document.getElementById('foundItemForm');
-
+    const foundItemForm = document.getElementById('reportFoundForm');
     if (foundItemForm) {
         foundItemForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            if (validateFoundItemForm()) {
+            if (!validateFoundItemForm()) {
+                event.preventDefault();
+            } else {
                 alert('Success: Found Item Report is valid! Submitting...');
-                // foundItemForm.submit();
             }
         });
     }
 
     function validateFoundItemForm() {
-        // 1. Check Item Name
-        const itemName = document.getElementById('foundItemName');
-        if (!itemName || itemName.value.trim() === '') {
-            return showError('foundItemName', 'Found Item Name is required.');
-        }
+        const itemName = document.getElementById('itemName');
+        if (!itemName || itemName.value.trim() === '') return showError('itemName', 'Item Name is required.');
 
-        // 2. Check Category
-        const itemCategory = document.getElementById('foundCategory');
-        if (!itemCategory || itemCategory.selectedIndex === 0) {
-            return showError('foundCategory', 'Please select a Category.');
-        }
+        const category = document.getElementById('category');
+        if (!category || category.value === '') return showError('category', 'Please select a Category.');
 
-        // 3. Check Reporter Email
-        const reporterEmail = document.getElementById('finderEmail');
+        const email = document.getElementById('email');
         const emailPattern = /@taylors\.edu\.my$/i;
-        if (!reporterEmail || reporterEmail.value.trim() === '') {
-            return showError('finderEmail', 'Email is required.');
-        } else if (!emailPattern.test(reporterEmail.value)) {
-            return showError('finderEmail', 'Please use a valid Taylor\'s email.');
-        }
+        if (!email || email.value.trim() === '') return showError('email', 'Email is required.');
+        else if (!emailPattern.test(email.value)) return showError('email', 'Please use a valid Taylor\'s email.');
 
         return true;
     }
 
-
     // ==========================================================================
-    // SECTION 3: SEARCH & FILTER LOGIC (For Lost/Found Browsing Pages)
+    // SECTION 3: SEARCH & FILTER LOGIC
     // ==========================================================================
 
-    const filterBtn = document.getElementById('applyFiltersBtn');
-    
-    if (filterBtn) {
-        filterBtn.addEventListener('click', function() {
-            // 1. Capture user inputs
-            const searchKeyword = document.getElementById('searchKeyword') ? document.getElementById('searchKeyword').value.toLowerCase() : '';
-            const filterCategory = document.getElementById('filterCategory') ? document.getElementById('filterCategory').value : 'All';
-
-            // 2. Select all item cards on the page
-            const items = document.querySelectorAll('.item-card');
-
-            // 3. Loop through items and hide/show based on criteria
-            let visibleCount = 0;
-            items.forEach(function(item) {
-                const title = item.querySelector('.card-title') ? item.querySelector('.card-title').innerText.toLowerCase() : '';
-                const category = item.getAttribute('data-category'); // Assumes HTML has data-category="Electronics"
-
-                // Check matches
-                const matchesSearch = title.includes(searchKeyword);
-                const matchesCategory = (filterCategory === 'All') || (category === filterCategory);
-
-                if (matchesSearch && matchesCategory) {
-                    item.style.display = 'block'; // Show
-                    visibleCount++;
-                } else {
-                    item.style.display = 'none'; // Hide
-                }
-            });
-
-            console.log(`Filter Applied: Showing ${visibleCount} items.`);
+    const filterForm = document.getElementById('filterForm');
+    if (filterForm) {
+        filterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            applyFilters();
+        });
+        filterForm.addEventListener('reset', function() {
+            setTimeout(applyFilters, 100); 
         });
     }
 
-    // Final console check
-    if (typeof console !== "undefined") {
-        console.log("main.js loaded successfully with validations.");
+    function applyFilters() {
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const locationFilter = document.getElementById('locationFilter');
+
+        const keyword = searchInput ? searchInput.value.toLowerCase() : '';
+        const category = categoryFilter ? categoryFilter.value : '';
+        const location = locationFilter ? locationFilter.value : '';
+
+        const items = document.querySelectorAll('.item-card');
+        let visibleCount = 0;
+
+        items.forEach(function(item) {
+            const title = item.querySelector('h3') ? item.querySelector('h3').innerText.toLowerCase() : '';
+            const itemCategory = item.getAttribute('data-category'); 
+            const itemLocation = item.getAttribute('data-location');
+
+            const matchesSearch = title.includes(keyword);
+            const matchesCategory = (category === '' || category === 'All Categories') || (itemCategory === category);
+            const matchesLocation = (location === '' || location === 'All Locations') || (itemLocation === location);
+
+            if (matchesSearch && matchesCategory && matchesLocation) {
+                item.style.display = 'flex'; 
+                visibleCount++;
+            } else {
+                item.style.display = 'none'; 
+            }
+        });
+
+        const countLabel = document.querySelector('.items-count');
+        if (countLabel) countLabel.textContent = `Showing ${visibleCount} items`;
     }
+
+    // ==========================================================================
+    // SECTION 4: ITEM ACTION BUTTONS (BULLETPROOF VERSION)
+    // ==========================================================================
+    
+    // We attach the listener to the whole document (Event Delegation)
+    document.addEventListener('click', function(event) {
+        
+        // Check if the clicked element has our specific button classes
+        if (event.target.classList.contains('btn-claim') || event.target.classList.contains('btn-contact')) {
+            
+            event.preventDefault(); 
+            
+            // Check Login Status
+            const studentId = sessionStorage.getItem("studentId");
+            
+            if (studentId) {
+                // User is logged in -> Open Email Client
+                const subject = "Inquiry regarding Lost/Found Item";
+                const body = "Hello, I am interested in the item you posted on Taylor's Lost & Found.";
+                window.location.href = `mailto:student@taylors.edu.my?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            } else {
+                // User is NOT logged in -> Alert and Redirect
+                // Timeout ensures the alert renders cleanly
+                setTimeout(() => {
+                    const confirmLogin = confirm("You must be logged in to contact the reporter. Go to Login page?");
+                    if (confirmLogin) {
+                        window.location.href = "index.html";
+                    }
+                }, 10);
+            }
+        }
+    });
+
+    console.log("main.js loaded: All sections active.");
 });
